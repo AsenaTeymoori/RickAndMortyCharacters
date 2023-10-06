@@ -1,5 +1,20 @@
-import '@/styles/globals.css'
+import "../styles/globals.css";
+import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+
+const client = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql',
+  cache: new InMemoryCache(),
+});
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <ApolloProvider client={client}>
+      <Component {...pageProps} />
+    </ApolloProvider>
+  );
 }
+
+export default MyApp;
+
